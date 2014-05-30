@@ -1,0 +1,27 @@
+Build.PL
+CHANGES
+ChangeLog
+GNUmakefile
+LICENSE
+MANIFEST
+META.json
+META.yml
+Build.PL
+Makefile.PL
+README.pod			     # General overview
+bin/terps.pl                        # demo code to try out features
+lib/Cmd/Features.pm
+lib/Cmd/help.pm
+lib/Cmd/preinit.pm
+lib/Cmd/ResetTTY.pm
+lib/Cmd/rl_filename_list.pm
+lib/Cmd/rl_bind_keyseq.pm
+lib/Cmd/rl_read_init_file.pm
+lib/Cmd/rl_redisplay.pm
+lib/Cmd/rl_set.pm
+lib/Cmd/SetTTY.pm
+lib/Cmd/tilde_complete.pm
+lib/Cmd.pm
+lib/CmdProc.pm
+lib/Load.pm
+t/00test-pod.t				# Make sure POD is Kosher
