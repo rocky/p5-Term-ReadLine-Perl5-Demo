@@ -4,6 +4,51 @@
 
 A REPL to experiment with L<Term::ReadLine::Perl5>
 
+=head1 Synopsis
+
+    treps.pl # enter the shell
+
+The program serves several purposes.
+
+For the person use interacts with L<Term::ReadLine::Perl5> as a result
+of using a program that makes use of this library
+(e.g. L<Devel::Trepan>, this program can be used to give you an
+understanding of what the capabilities are and how you might bind keys
+to make use of the libraries editing capabilites.
+
+For the person who wants to use L<Term::ReadLine::Perl5>, this is a
+pretty solid example of how to use this library. It contains (or will
+contain) a multi-level dynamic completion, or interact with history.
+
+It can also be used as an example for how to write a command shell
+where:
+
+=over
+
+=item *
+
+each command is its own module with OO properties like, help text, min
+and max aguments
+
+=item *
+
+command help text is in pod format that appears nicely on terminals
+while also appearing nicely in the POD that appears publically
+
+=item *
+
+the number of parameters passed are checked for validity
+
+=item *
+each command can control its command completion
+
+=back
+
+=head1 HELP!
+
+There's much that can be done here. Please also feel free to modify
+for other readlines like L<Term::ReadLine::Gnu> or L<Caroline>.
+
 =head1 LICENSE
 
 Copyright (c) 2014 Rocky Bernstein.
