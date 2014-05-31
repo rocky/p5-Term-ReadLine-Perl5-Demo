@@ -28,7 +28,7 @@ where:
 =item *
 
 each command is its own module with OO properties like, help text, min
-and max aguments
+and max arguments
 
 =item *
 

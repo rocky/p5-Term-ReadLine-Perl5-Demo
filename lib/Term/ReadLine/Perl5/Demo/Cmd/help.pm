@@ -72,12 +72,12 @@ sub run($$) {
     if (scalar(@$args) > 1) {
         my $real_name;
         if ($cmd_name eq '*') {
-            print "All currently valid command names:\n";
+            $proc->section("All currently valid command names:");
             my @cmds = sort($self->command_names());
-	    print Array::Columnize::columnize(\@cmds,
-					      {displaywidth => $proc->{num_cols},
-					       colsep => '  ',
-					      });
+	    $proc->msg(Array::Columnize::columnize(\@cmds,
+						   {displaywidth => $proc->{num_cols},
+						    colsep => '  ',
+						   }));
         } else {
             my $cmd_obj = $proc->{commands}{$cmd_name};
 	    if ($cmd_obj) {
@@ -93,19 +93,19 @@ sub run($$) {
 		my @cmds = $self->command_names();
 		my @matches = sort grep(/^${cmd_name}/, @cmds);
 		if (!scalar @matches) {
-		    print "No commands found matching /^${cmd_name}/. Try \"help\".\n";
+		    $proc->errmsg("No commands found matching /^${cmd_name}/. Try \"help\".");
 		} else {
-		    print "Command names matching /^${cmd_name}/:\n";
-		    print Array::Columnize::columnize(\@matches,
-						      {displaywidth => $proc->{num_cols},
-						       colsep => '  ',
-						      });
+		    $proc->msg("Command names matching /^${cmd_name}/:");
+		    $proc->msg(Array::Columnize::columnize(\@matches,
+							   {displaywidth => $proc->{num_cols},
+							    colsep => '  ',
+							   }));
 		}
 	    }
         }
     } else {
-        print "Enter help * for a list of commands\n";
-	print "or help <command> for help on a particular command.\n";
+        $proc->msg("Enter help * for a list of commands");
+	$proc->msg("or help <command> for help on a particular command.");
     }
 }
 

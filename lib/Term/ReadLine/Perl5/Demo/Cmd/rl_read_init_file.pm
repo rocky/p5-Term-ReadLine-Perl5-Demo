@@ -34,12 +34,13 @@ HELP
 
 sub run($$) {
     my ($self, $args) = @_;
+    my $proc = $self->{proc};
     my $filename = $args->[1];
 
     if (Term::ReadLine::Perl5::readline::rl_read_init_file($filename)) {
-	print "Filename $filename read\n";
+	$proc->msg("Filename $filename read");
     } else {
-	print "Problem reading $filename\n";
+	$proc->msg("Problem reading $filename");
     };
 }
 

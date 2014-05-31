@@ -70,4 +70,19 @@ sub new($$) {
     $self;
 }
 
+sub msg($$) {
+    my ($self, $msg) = @_;
+    $self->{proc}->msg($msg);
+}
+
+sub errmsg($$) {
+    my ($self, $msg) = @_;
+    $self->{proc}->errmsg($msg);
+}
+
+sub section($$) {
+    my ($self, $msg) = @_;
+    $self->{proc}->section($msg);
+}
+
 1;

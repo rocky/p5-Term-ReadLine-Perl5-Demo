@@ -35,9 +35,10 @@ HELP
 sub run($$) {
     my ($self, $args) = @_;
     my @args = @$args;
+    my $proc = $self->{proc};
     my $prefix = (@args == 1) ? '~': $args[1];
     if (substr($prefix, 0, 1) ne '~') {
-	print "Tilde expansion expected to start with ~\n";
+	$proc->errmsg("Tilde expansion expected to start with ~");
     } else {
 	$prefix = substr($prefix, 1);
 	my @matches =

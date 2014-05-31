@@ -32,18 +32,18 @@ sub run($$) {
     my $proc = $self->{proc};
     my $term = $proc->{term};
     my @features = sort keys %{ $term->Features; };
-    print "Features:\n";
-    print Array::Columnize::columnize(\@features,
-				      {displaywidth => $proc->{num_cols},
-				       colsep => ' ',
-				       lineprefix => '  '});
-}
+    $self->section("Features:");
+    $self->msg(Array::Columnize::columnize(\@features,
+					   {displaywidth => $proc->{num_cols},
+					    colsep => ' ',
+					    lineprefix => '  '}));
+	}
 
 unless (caller) {
-    my $proc = Term::ReadLine::Perl5::Demo::Cmd->new;
+    require Term::ReadLine::Perl5::Demo::CmdProc;
     require Term::ReadLine::Perl5;
     my $term = new Term::ReadLine::Perl5 'Feature test';
-    $proc->{term} = $term;
+    my $proc = Term::ReadLine::Perl5::Demo::CmdProc->new($term);
     $proc->{num_cols} = 30;
     my $cmd = __PACKAGE__->new($proc);
     $cmd->run([$NAME]);

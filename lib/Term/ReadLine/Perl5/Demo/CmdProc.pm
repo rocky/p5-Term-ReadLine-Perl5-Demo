@@ -29,7 +29,7 @@ sub ok_for_running ($$$$) {
         my $msg =
             sprintf("Command '%s' needs at least %d argument(s); " .
                     "got %d.", $name, $min_args, $nargs);
-        print  $msg, "\n";
+        self->errmsg($msg);
         return 0;
     }
     my $max_args = eval { $cmd->MAX_ARGS };
@@ -37,7 +37,7 @@ sub ok_for_running ($$$$) {
         my $mess =
             sprintf("Command '%s' needs at most %d argument(s); " .
                     "got %d.", $name, $max_args, $nargs);
-        print $mess, "\n";
+        self->errmsg($mess);
         return 0;
     }
 
@@ -54,6 +54,21 @@ sub new($$) {
     bless $self, $class;
     $self->load_cmds_initialize;
     $self;
+}
+
+sub msg($$) {
+    my ($self, $msg) = @_;
+    print "$msg\n";
+}
+
+sub errmsg($$) {
+    my ($self, $msg) = @_;
+    print "** $msg\n";
+}
+
+sub section($$) {
+    my ($self, $msg) = @_;
+    print "$msg\n";
 }
 
 1;
