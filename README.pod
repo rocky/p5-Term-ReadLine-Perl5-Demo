@@ -12,7 +12,7 @@ The program serves several purposes.
 
 For the person use interacts with L<Term::ReadLine::Perl5> as a result
 of using a program that makes use of this library
-(e.g. L<Devel::Trepan>, this program can be used to give you an
+e.g. L<Devel::Trepan>, this program can be used to give you an
 understanding of what the capabilities are and how you might bind keys
 to make use of the libraries editing capabilites.
 

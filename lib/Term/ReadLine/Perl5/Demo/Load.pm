@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Rocky Bernstein <rocky@cpan.org>
 
-# Part of demo that loads up debugger commands from
+# Part of demo that loads up commands from
 # builtin and user directories.
-# Sets @commands, @aliases, @macros
+# Sets @commands
 use rlib '../../../..';
 
 package Term::ReadLine::Perl5::Demo::CmdProc;
@@ -42,7 +42,7 @@ sub load_cmds_initialize($)
 
 Loads in debugger commands by require'ing each Perl file in the
 'command' directory. Then a new instance of each class of the
-form Trepan::xxCommand is added to @commands and that array
+form Term::ReadLine::Perl5::Demo:xxx is added to @commands and that array
 is returned.
 =cut
 sub load_debugger_commands($$)
@@ -143,7 +143,7 @@ sub setup_command($$)
 	return '';
     } else {
         print "Error instantiating $name\n";
-	print "$@\n";
+	# print "$@\n";
 	return $@;
     }
   }
