@@ -43,25 +43,27 @@ sub run($$) {
     my $proc = $self->{proc};
     my $term = $proc->{term};
     my @keymap;
+    my $keymap_name = $args[1];
     my ($default, $name);
     # FIXME: DRY me.
-    if ($args[0] == 'emacs') {
+    if ($keymap_name eq 'emacs') {
 	@keymap = @Term::ReadLine::Perl5::readline::emacs_keymap;
 	$default = $Term::ReadLine::Perl5::readline::emacs_keymap{'default'};
 	$name    = $Term::ReadLine::Perl5::readline::emacs_keymap{'name'};
-    } elsif ($args[0] == 'vi') {
+    } elsif ($keymap_name eq 'vi') {
 	@keymap = @Term::ReadLine::Perl5::readline::vi_keymap;
 	$default = $Term::ReadLine::Perl5::readline::vi_keymap{'default'};
 	$name    = $Term::ReadLine::Perl5::readline::vi_keymap{'name'};
-    } elsif ($args[0] == 'vicmd') {
+    } elsif ($keymap_name eq 'vicmd') {
 	@keymap = @Term::ReadLine::Perl5::readline::vicmd_keymap;
 	$default = $Term::ReadLine::Perl5::readline::vicmd_keymap{'default'};
 	$name    = $Term::ReadLine::Perl5::readline::vicmd_keymap{'name'};
-    } elsif ($args[0] == 'vipos') {
+    } elsif ($keymap_name eq 'vipos') {
+	print "GOTIT\n";
 	@keymap = @Term::ReadLine::Perl5::readline::vipos_keymap;
 	$default = $Term::ReadLine::Perl5::readline::vipos_keymap{'default'};
 	$name    = $Term::ReadLine::Perl5::readline::vipos_keymap{'name'};
-    } elsif ($args[0] == 'visearch') {
+    } elsif ($keymap_name eq 'visearch') {
 	@keymap = @Term::ReadLine::Perl5::readline::visearch_keymap;
 	$default = $Term::ReadLine::Perl5::readline::visearch_keymap{'default'};
 	$name    = $Term::ReadLine::Perl5::readline::visearch_keymap{'name'};
@@ -74,7 +76,7 @@ sub run($$) {
 		   $name, $default);
     $self->section("Key\tBinding");
     for (my $i=0; $i<=127; $i++) {
-	my $action = $Term::ReadLine::Perl5::readline::emacs_keymap[$i];
+	my $action = $keymap[$i];
 	next unless defined($action);
 	printf("%s:\t%s\n", classify($i), $action);
     }
@@ -87,7 +89,9 @@ unless (caller) {
     my $proc = Term::ReadLine::Perl5::Demo::CmdProc->new($term);
     $proc->{num_cols} = 30;
     my $cmd = __PACKAGE__->new($proc);
-    $cmd->run([$NAME]);
+    $cmd->run([$NAME, 'emacs']);
+    print '=' x 30, "\n";
+    $cmd->run([$NAME, 'vipos']);
 }
 
 1;
