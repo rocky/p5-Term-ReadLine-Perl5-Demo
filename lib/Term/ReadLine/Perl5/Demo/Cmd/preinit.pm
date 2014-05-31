@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Rocky Bernstein <rocky@cpan.org>
-package Cmd::ResetTTY;
-use rlib '../../lib';
+package Term::ReadLine::Perl5::Demo::Cmd::preinit;
 
-use rlib '.';
-use if !@ISA, Cmd;
+use rlib '../lib';
+use Term::ReadLine::Perl5::Demo::Cmd;
 unless (@ISA) {
     eval <<"EOE";
 use constant MIN_ARGS  => 0;  # Need at least this many
-use constant MAX_ARGS  => 0;  # Need at most this many
+use constant MAX_ARGS  => 0;  # Need at most this many - undef -> unlimited.
 EOE
 }
 
@@ -24,22 +23,19 @@ our $NAME = set_name();
 our $HELP = <<'HELP';
 =pod
 
-B<ResetTTY>
+B<preinit>
 
-Resets TTY state.
-
-=head2 See also:
-
-C<SetTTY>
+Runs Term::ReadLine::Perl5's pre-initialize routine
 =cut
 HELP
 
 sub run($$) {
-    Term::ReadLine::Perl5::readline::ResetTTY();
+    my ($self, $args) = @_;
+    Term::ReadLine::Perl5::readline::preinit();
 }
 
 unless (caller) {
-    my $proc = Cmd->new;
+    my $proc = Term::ReadLine::Perl5::Demo::Cmd->new;
     my $cmd = __PACKAGE__->new($proc);
     $cmd->run([$NAME]);
 }

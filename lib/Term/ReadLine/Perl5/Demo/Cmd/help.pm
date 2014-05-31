@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Rocky Bernstein <rocky@cpan.org>
 use Array::Columnize;
-use Pod::Text;
-use rlib '../../lib';
+use Pod::Text::Color;
 
-package Cmd::help;
+package Term::ReadLine::Perl5::Demo::Cmd::help;
 
-use rlib '.';
-use if !@ISA, Cmd;
+use rlib '../lib';
+use Term::ReadLine::Perl5::Demo::Cmd;
 unless (@ISA) {
     eval <<"EOE";
 use constant MIN_ARGS  => 0;      # Need at least this many
@@ -53,7 +52,7 @@ sub help2podstring($)
     my ($input_string) = @_;
     my $width = ($ENV{'COLUMNS'} || 80);
 
-    my $p2t = Pod::Text->new(width => $width, indent => 2, utf8=>1);
+    my $p2t = Pod::Text::Color->new(width => $width, indent => 2, utf8=>1);
     my $output_string;
     open(my $out_fh, '>', \$output_string);
     open(my $in_fh, '<', \$input_string);
@@ -92,7 +91,7 @@ sub run($$) {
 		}
 	    } else {
 		my @cmds = $self->command_names();
-		my @matches = sort grep(/^${cmd_name}/, @cmds );
+		my @matches = sort grep(/^${cmd_name}/, @cmds);
 		if (!scalar @matches) {
 		    print "No commands found matching /^${cmd_name}/. Try \"help\".\n";
 		} else {
@@ -111,8 +110,8 @@ sub run($$) {
 }
 
 unless (caller) {
-    require CmdProc;
-    my $proc = CmdProc->new;
+    require Term::ReadLine::Perl5::Demo::CmdProc;
+    my $proc = Term::ReadLine::Perl5::Demo::CmdProc->new;
     $proc->{num_cols} = 30;
     my $cmd = __PACKAGE__->new($proc);
     $cmd->run([$NAME]);

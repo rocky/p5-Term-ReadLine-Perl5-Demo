@@ -5,7 +5,8 @@ use Exporter;
 use Array::Columnize;
 use File::Basename;
 
-package Cmd;
+no warnings 'redefine';
+package Term::ReadLine::Perl5::Demo::Cmd;
 
 use vars qw(@CMD_VARS @EXPORT @ISA @CMD_ISA $HELP %commands @commands
             $VERSION);
@@ -16,13 +17,12 @@ BEGIN {
 use vars @CMD_VARS;
 @ISA = qw(Exporter);
 
-@CMD_ISA  = qw(Cmd);
+@CMD_ISA  = qw(Term::ReadLine::Perl5::Demo::Cmd);
 @EXPORT = qw(&set_name @CMD_ISA @CMD_VARS declared %commands @commands);
 
-use rlib '../lib';
 use Term::ReadLine::Perl5;
-use rlib '.';
-use Load;
+use rlib '../lib';
+use Term::ReadLine::Perl5::Demo::Load;
 
 # # Because we use Exporter we want to silence:
 # #   Use of inherited AUTOLOAD for non-method ... is deprecated
@@ -50,7 +50,7 @@ sub new($$) {
 	num_cols => $num_cols,
         class    => $class,
     };
-    my $base_prefix="Cmd::";
+    my $base_prefix="Term::ReadLine::Perl5::Demo::Cmd::";
     for my $field (@CMD_VARS) {
         my $sigil = substr($field, 0, 1);
         my $new_field = index('$@', $sigil) >= 0 ? substr($field, 1) : $field;

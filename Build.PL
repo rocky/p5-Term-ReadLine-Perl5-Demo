@@ -22,7 +22,7 @@ my $builder = Module::Build->new(
     create_makefile_pl  => 'passthrough',
     dist_abstract       => 'Shell for Term::ReadLine::Perl5',
     dist_author         => 'Rocky Bernstein <rocky@cpan.org>',
-    dist_version_from   => 'lib/Cmd.pm',
+    dist_version_from   => 'lib/Term/ReadLine/Perl5/Demo/Cmd.pm',
     license             => 'perl',
     needs_compiler      => 0,
     release_status      => $release_status,
@@ -43,7 +43,7 @@ my $builder = Module::Build->new(
 	'perl'                    => $min_perl_version,
     },
     requires => {
-        'perl'                    => $min_perl_versiion,
+        'perl'                    => $min_perl_version,
         'Array::Columnize'        => '1.04',
         'rlib'                    => '0.02',
         'version'                 => 0,

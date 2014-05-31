@@ -1,5 +1,5 @@
 Build.PL
-CHANGES
+Changes
 ChangeLog
 GNUmakefile
 LICENSE
@@ -10,18 +10,18 @@ Build.PL
 Makefile.PL
 README.pod			     # General overview
 bin/terps.pl                        # demo code to try out features
-lib/Cmd/Features.pm
-lib/Cmd/help.pm
-lib/Cmd/preinit.pm
-lib/Cmd/ResetTTY.pm
-lib/Cmd/rl_filename_list.pm
-lib/Cmd/rl_bind_keyseq.pm
-lib/Cmd/rl_read_init_file.pm
-lib/Cmd/rl_redisplay.pm
-lib/Cmd/rl_set.pm
-lib/Cmd/SetTTY.pm
-lib/Cmd/tilde_complete.pm
-lib/Cmd.pm
-lib/CmdProc.pm
-lib/Load.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/Features.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/help.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/preinit.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/ResetTTY.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/rl_filename_list.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/rl_bind_keyseq.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/rl_read_init_file.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/rl_redisplay.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/rl_set.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/SetTTY.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/tilde_complete.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd.pm
+lib/Term/ReadLine/Perl5/Demo/CmdProc.pm
+lib/Term/ReadLine/Perl5/Demo/Load.pm
 t/00test-pod.t				# Make sure POD is Kosher

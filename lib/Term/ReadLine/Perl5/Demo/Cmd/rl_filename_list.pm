@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Rocky Bernstein <rocky@cpan.org>
-package Cmd::rl_filename_list;
+package Term::ReadLine::Perl5::Demo::Cmd::rl_filename_list;
 use Data::Printer;
-use rlib '../../lib';
-package Cmd::rl_filename_list;
+use rlib '../lib';
+use Term::ReadLine::Perl5::Demo::Cmd;
 
-use rlib '.';
-use if !@ISA, Cmd;
 unless (@ISA) {
     eval <<"EOE";
 use constant MIN_ARGS  => 1;  # Need at least this many
@@ -45,7 +43,7 @@ sub run($$) {
 };
 
 unless (caller) {
-    my $proc = Cmd->new;
+    my $proc = Term::ReadLine::Perl5::Demo::Cmd->new;
     my $cmd = __PACKAGE__->new($proc);
     $cmd->run([$NAME, substr(__FILE__, 0, 3)]);
     print '-' x 30, "\n";

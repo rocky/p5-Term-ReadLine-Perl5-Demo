@@ -7,14 +7,13 @@
 # functions.
 # use Enbugger 'trepan';
 use strict; use warnings;
-use rlib '../lib';
 
 use Term::ReadLine::Perl5;
 use Term::ReadKey;
 use Data::Printer;
 
-use rlib '.';
-use CmdProc;
+use rlib '../lib';
+use Term::ReadLine::Perl5::Demo::CmdProc;
 
 END{
     print "That's all folks!...\n";
@@ -24,7 +23,7 @@ END{
 my $term = new Term::ReadLine::Perl5 'Term::ReadLine::Perl5 shell';
 my $attribs = $term->Attribs;
 
-my $cmdproc = CmdProc->new($term);
+my $cmdproc = Term::ReadLine::Perl5::Demo::CmdProc->new($term);
 my @commands = sort keys %{$cmdproc->{commands}};
 
 sub command_completion($$$) {
@@ -58,15 +57,15 @@ while ( defined (my $line = $term->readline($prompt)) )
     chomp $line;
     my @args = split(/[ \t]/, $line);
     next unless @args;
-    my $command = $args[0];
-    if ($command eq 'exit') {
+    my $cmd_name = $args[0];
+    if ($cmd_name eq 'exit') {
 	last;
     } else {
-	my $cmd = $cmdproc->{commands}{$command};
+	my $cmd = $cmdproc->{commands}{$cmd_name};
 	if ($cmd) {
-	    # FIXME: Add
-            # if ($self->ok_for_running($cmd, $command, scalar(@args)-1))
-	    $cmd->run(\@args);
+            if ($cmdproc->ok_for_running($cmd, $cmd_name, scalar(@args)-1)) {
+		$cmd->run(\@args);
+	    }
 	} else {
 	    print "You typed:\n$line\n";
 	}

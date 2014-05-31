@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Rocky Bernstein <rocky@cpan.org>
-use rlib '../../lib';
-package Cmd::rl_set;
+package Term::ReadLine::Perl5::Demo::Cmd::rl_set;
+use rlib '../lib';
+use Term::ReadLine::Perl5::Demo::Cmd;
 
-use rlib '.';
-use if !@ISA, Cmd;
 unless (@ISA) {
     eval <<"EOE";
 use constant MIN_ARGS  => 2;  # Need at least this many
@@ -43,7 +42,7 @@ sub run($$) {
 }
 
 unless (caller) {
-    my $proc = Cmd->new;
+    my $proc = Term::ReadLine::Perl5::Demo::Cmd->new;
     my $cmd = __PACKAGE__->new($proc);
     $cmd->run([$NAME, 'EditingMode', 'emacs']);
     $cmd->run([$NAME, 'EditingMode', 'vi']);

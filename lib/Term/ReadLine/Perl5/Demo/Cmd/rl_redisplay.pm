@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Rocky Bernstein <rocky@cpan.org>
-package Cmd::rl_redisplay;
-use rlib '../../lib';
-
-use rlib '.';
-use if !@ISA, Cmd;
+package Term::ReadLine::Perl5::Demo::Cmd::rl_redisplay;
+use rlib '../lib';
+use Term::ReadLine::Perl5::Demo::Cmd;
 unless (@ISA) {
     eval <<"EOE";
 use constant MIN_ARGS  => 0;  # Need at least this many
@@ -37,7 +35,7 @@ sub run($$) {
 }
 
 unless (caller) {
-    my $proc = Cmd->new;
+    my $proc = Term::ReadLine::Perl5::Demo::Cmd->new;
     # require Term::ReadLine::Perl5;
     # my $term = new Term::ReadLine::Perl5 'Feature test';
     # $proc->{term} = $term;

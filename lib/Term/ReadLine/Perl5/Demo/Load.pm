@@ -4,9 +4,9 @@
 # Part of demo that loads up debugger commands from
 # builtin and user directories.
 # Sets @commands, @aliases, @macros
-use rlib '../../..';
+use rlib '../../../..';
 
-package CmdProc;
+package Term::ReadLine::Perl5::Demo::CmdProc;
 $Load_seen = 1;
 use warnings; use strict;
 no warnings 'redefine';
@@ -21,7 +21,7 @@ use Cwd 'abs_path';
 
 Loads in our built-in commands.
 
-Called from Devel::Trepan::CmdProcessor->new in CmdProcessor.pm
+Called from Term::ReadLine::Perl5::CmdProcessor->new in CmdProc.pm
 =cut
 
 sub load_cmds_initialize($)
@@ -135,7 +135,7 @@ sub setup_command($$)
     my ($self, $name) = @_;
     my $cmd_obj;
     my $cmd_name = $name;
-    my $new_cmd = "\$cmd_obj=Cmd::${name}" .
+    my $new_cmd = "\$cmd_obj=Term::ReadLine::Perl5::Demo::Cmd::${name}" .
         "->new(\$self, \$cmd_name); 1";
     if (eval $new_cmd) {
         # Add to list of commands
@@ -143,13 +143,14 @@ sub setup_command($$)
 	return '';
     } else {
         print "Error instantiating $name\n";
+	print "$@\n";
 	return $@;
     }
   }
 
 unless (caller) {
     require CmdProc;
-    my $cmdproc = CmdProc->new;
+    my $cmdproc = Term::ReadLine::Perl5::Demo::CmdProc->new;
     $cmdproc->load_cmds_initialize();
     $cmdproc->{num_cols} = 30;
     require Array::Columnize;

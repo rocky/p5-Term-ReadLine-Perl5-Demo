@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Rocky Bernstein <rocky@cpan.org>
 use Array::Columnize;
-package Cmd::Features;
-use rlib '../../lib';
+package Term::ReadLine::Perl5::Demo::Cmd::Features;
+use rlib '../lib';
 
-use rlib '.';
-use if !@ISA, Cmd;
-unless (@ISA) {
-    eval <<"EOE";
+use Term::ReadLine::Perl5::Demo::Cmd;
 use constant MIN_ARGS  => 0;  # Need at least this many
 use constant MAX_ARGS  => 0;  # Need at most this many
-EOE
-}
 
 use strict; use vars qw(@ISA); @ISA = @CMD_ISA;
 use vars @CMD_VARS;  # Value inherited from parent
@@ -45,7 +40,7 @@ sub run($$) {
 }
 
 unless (caller) {
-    my $proc = Cmd->new;
+    my $proc = Term::ReadLine::Perl5::Demo::Cmd->new;
     require Term::ReadLine::Perl5;
     my $term = new Term::ReadLine::Perl5 'Feature test';
     $proc->{term} = $term;

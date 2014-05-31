@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Rocky Bernstein <rocky@cpan.org>
+package Term::ReadLine::Perl5::Demo::Cmd::rl_read_init_file;
 use Data::Printer;
-use rlib '../../lib';
-package Cmd::rl_read_init_file;
+use rlib '../lib';
+use Term::ReadLine::Perl5::Demo::Cmd;
 
-use rlib '.';
-use if !@ISA, Cmd;
 unless (@ISA) {
     eval <<"EOE";
 use constant MIN_ARGS  => 1;  # Need at least this many
@@ -45,9 +44,11 @@ sub run($$) {
 }
 
 unless (caller) {
-    my $proc = Cmd->new;
+    my $proc = Term::ReadLine::Perl5::Demo::Cmd->new;
     my $cmd = __PACKAGE__->new($proc);
-    # $cmd->run([$NAME, '~/.initrc');
+    if (@ARGV && -r $ARGV[0]) {
+	$cmd->run([$NAME, $ARGV[0]]);
+    }
 }
 
 1;

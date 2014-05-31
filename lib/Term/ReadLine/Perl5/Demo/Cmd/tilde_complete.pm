@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Rocky Bernstein <rocky@cpan.org>
-package Cmd::tilde_complete;
+package Term::ReadLine::Perl5::Demo::Cmd::tilde_complete;
 use Data::Printer;
 use rlib '../../lib';
 
 use rlib '.';
-use if !@ISA, Cmd;
+use if !@ISA, Term::ReadLine::Perl5::Demo::Cmd;
 unless (@ISA) {
     eval <<"EOE";
 use constant MIN_ARGS  => 0;  # Need at least this many
@@ -47,7 +47,7 @@ sub run($$) {
 }
 
 unless (caller) {
-    my $proc = Cmd->new;
+    my $proc = Term::ReadLine::Perl5::Demo::Cmd->new;
     my $cmd = __PACKAGE__->new($proc);
     $cmd->run([$NAME]);
     print "-" x 30, "\n";
