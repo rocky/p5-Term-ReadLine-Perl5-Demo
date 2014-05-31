@@ -10,15 +10,16 @@ A REPL to experiment with L<Term::ReadLine::Perl5>
 
 The program serves several purposes.
 
-For the person use interacts with L<Term::ReadLine::Perl5> as a result
+For the person who interacts with L<Term::ReadLine::Perl5> as a result
 of using a program that makes use of this library
 e.g. L<Devel::Trepan>, this program can be used to give you an
 understanding of what the capabilities are and how you might bind keys
 to make use of the libraries editing capabilites.
 
-For the person who wants to use L<Term::ReadLine::Perl5>, this is a
-pretty solid example of how to use this library. It contains (or will
-contain) a multi-level dynamic completion, or interact with history.
+For the person who wants to use the L<Term::ReadLine::Perl5> API, this
+is a pretty solid example of how to use this library. It contains (or
+will contain) a multi-level dynamic completion, and how to interact with
+history.
 
 It can also be used as an example for how to write a command shell
 where:
