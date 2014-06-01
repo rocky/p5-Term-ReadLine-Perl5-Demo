@@ -20,6 +20,30 @@ use Term::ReadLine::Perl5::Demo::Load;
 
 my ($num_cols,$num_rows) =  Term::ReadKey::GetTerminalSize(\*STDOUT);
 
+# Return true if arg is 'on' or 1 and false arg is 'off' or 0.
+# Any other value is returns undef.
+sub get_onoff($$;$$)
+{
+    my ($self, $arg, $default, $print_error) = @_;
+    $print_error = 1 unless defined $print_error;
+    unless (defined $arg) {
+        unless (defined $default) {
+            if ($print_error) {
+                $self->errmsg("Expecting 'on', 1, 'off', or 0. Got nothing.");
+                return undef;
+            }
+        }
+        return $default
+    }
+    my $darg = lc $arg;
+    return 1 if ($arg eq '1') || ($darg eq 'on');
+    return 0 if ($arg eq '0') || ($darg eq'off');
+
+    $self->errmsg("Expecting 'on', 1, 'off', or 0. Got: ${arg}.") if
+        $print_error;
+    return undef;
+}
+
 # Check that we meet the criteria that cmd specifies it needs
 sub ok_for_running ($$$$) {
     my ($self, $cmd, $name, $nargs) = @_;

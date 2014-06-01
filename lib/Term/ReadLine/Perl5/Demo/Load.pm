@@ -143,7 +143,7 @@ sub setup_command($$)
 	return '';
     } else {
         print "Error instantiating $name\n";
-	# print "$@\n";
+	print "$@\n";
 	return $@;
     }
   }
