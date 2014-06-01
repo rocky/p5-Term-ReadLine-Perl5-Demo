@@ -12,6 +12,7 @@ README.pod			    # General overview
 bin/terps.pl                        # demo code to try out features
 lib/Term/ReadLine/Perl5/Demo/Cmd/Bindings.pm
 lib/Term/ReadLine/Perl5/Demo/Cmd/Features.pm
+lib/Term/ReadLine/Perl5/Demo/Cmd/debug.pm
 lib/Term/ReadLine/Perl5/Demo/Cmd/help.pm
 lib/Term/ReadLine/Perl5/Demo/Cmd/preinit.pm
 lib/Term/ReadLine/Perl5/Demo/Cmd/ResetTTY.pm
