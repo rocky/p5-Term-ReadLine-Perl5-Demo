@@ -8,7 +8,7 @@ META.json
 META.yml
 Build.PL
 Makefile.PL
-README.pod			     # General overview
+README.pod			    # General overview
 bin/terps.pl                        # demo code to try out features
 lib/Term/ReadLine/Perl5/Demo/Cmd/Bindings.pm
 lib/Term/ReadLine/Perl5/Demo/Cmd/Features.pm
@@ -24,5 +24,6 @@ lib/Term/ReadLine/Perl5/Demo/Cmd/SetTTY.pm
 lib/Term/ReadLine/Perl5/Demo/Cmd/tilde_complete.pm
 lib/Term/ReadLine/Perl5/Demo/Cmd.pm
 lib/Term/ReadLine/Perl5/Demo/CmdProc.pm
+lib/Term/ReadLine/Perl5/Demo/Complete.pm
 lib/Term/ReadLine/Perl5/Demo/Load.pm
 t/00test-pod.t				# Make sure POD is Kosher

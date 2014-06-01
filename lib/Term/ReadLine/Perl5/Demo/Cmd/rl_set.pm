@@ -3,6 +3,7 @@
 package Term::ReadLine::Perl5::Demo::Cmd::rl_set;
 use rlib '../lib';
 use Term::ReadLine::Perl5::Demo::Cmd;
+use Term::ReadLine::Perl5::Demo::CmdProc qw(complete_token);
 
 unless (@ISA) {
     eval <<"EOE";
@@ -23,7 +24,7 @@ our $NAME = set_name();
 our $HELP = <<'HELP';
 =pod
 
-B<rl_set> I<var> I<valur>
+B<rl_set> I<var> I<value>
 
 Sets an internal ReadLine variable like EditingMode or CompleteAddsuffix.
 
@@ -34,6 +35,20 @@ Sets an internal ReadLine variable like EditingMode or CompleteAddsuffix.
 
 =cut
 HELP
+
+sub complete($$)
+{
+    my ($self, $prefix) = @_;
+    my $proc = $self->{proc};
+    my @vars = qw(
+                  CompleteAddsuffix
+                  ConvertMeta DeleteSelection EditingMode
+                  HorizontalScrollMode
+                  MarkModifiedLines OutputMeta
+                  PreferVisibleBell
+                  TcshCompleteMode );
+    complete_token(\@vars, $prefix);
+}
 
 sub run($$) {
     my ($self, $args) = @_;

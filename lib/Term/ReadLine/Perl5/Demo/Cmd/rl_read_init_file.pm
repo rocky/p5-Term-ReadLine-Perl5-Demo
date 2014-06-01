@@ -4,6 +4,7 @@ package Term::ReadLine::Perl5::Demo::Cmd::rl_read_init_file;
 use Data::Printer;
 use rlib '../lib';
 use Term::ReadLine::Perl5::Demo::Cmd;
+use Term::ReadLine::Perl5::Demo::CmdProc qw(filename_list);
 
 unless (@ISA) {
     eval <<"EOE";
@@ -31,6 +32,12 @@ Read key bindings and variable assignments from filename.
 Runs L<Term::ReadLine::Perl5::read_init_file>.
 =cut
 HELP
+
+sub complete($$)
+{
+    my ($self, $prefix) = @_;
+    filename_list($prefix);
+}
 
 sub run($$) {
     my ($self, $args) = @_;

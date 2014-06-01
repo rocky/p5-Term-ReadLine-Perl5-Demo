@@ -27,7 +27,7 @@ our $HELP = <<'HELP';
 
 B<tilde_complete> I<~var>
 
-Give list of filename completions for <~var>.
+Give list of filename completions for I<~var>.
 
 =cut
 HELP

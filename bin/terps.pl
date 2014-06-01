@@ -24,13 +24,6 @@ my $term = new Term::ReadLine::Perl5 'Term::ReadLine::Perl5 shell';
 my $attribs = $term->Attribs;
 
 my $cmdproc = Term::ReadLine::Perl5::Demo::CmdProc->new($term);
-my @commands = sort keys %{$cmdproc->{commands}};
-
-sub command_completion($$$) {
-  my ($text, $line, $start) = @_;
-  return () if $start != 0;
-  grep(/^$text/, @commands);
-}
 
 print "================================================\n";
 print "Welcome to the Term::ReadLine::Perl5 demo shell!\n";
@@ -38,7 +31,12 @@ print "================================================\n";
 
 # Silence "used only once warnings" inside ReadLine::Term::Perl.
 no warnings 'once';
-$attribs->{completion_function} = \&command_completion;
+$attribs->{completion_function} = sub($$$$) {
+    my ($text, $line, $start, $end) = @_;
+    Term::ReadLine::Perl5::Demo::CmdProc::command_completion($cmdproc, $text,
+							     $line, $start,
+							     $end);
+};
 
 print "\nType 'help' for help, and 'exit' to leave.\n";
 print "Entered lines are echoed and put into history.\n";

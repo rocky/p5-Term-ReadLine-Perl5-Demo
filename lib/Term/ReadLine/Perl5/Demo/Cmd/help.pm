@@ -7,6 +7,8 @@ package Term::ReadLine::Perl5::Demo::Cmd::help;
 
 use rlib '../lib';
 use Term::ReadLine::Perl5::Demo::Cmd;
+use Term::ReadLine::Perl5::Demo::CmdProc qw(complete_token);
+
 unless (@ISA) {
     eval <<"EOE";
 use constant MIN_ARGS  => 0;      # Need at least this many
@@ -38,12 +40,21 @@ B<help> [I<command|regular-expression> | *]
 =cut
 HELP
 
+sub complete($$)
+{
+    my ($self, $prefix) = @_;
+    my $proc = $self->{proc};
+    my @candidates = ('*', $self->command_names());
+    my @matches = complete_token(\@candidates, $prefix);
+    sort @matches;
+}
+
 sub command_names($)
 {
     my ($self) = @_;
     my $proc = $self->{proc};
     my %cmd_hash = %{$proc->{commands}};
-    my @commands = keys %cmd_hash;
+    my @commands = sort keys %cmd_hash;
     return @commands;
 }
 
@@ -73,7 +84,7 @@ sub run($$) {
         my $real_name;
         if ($cmd_name eq '*') {
             $proc->section("All currently valid command names:");
-            my @cmds = sort($self->command_names());
+            my @cmds = $self->command_names();
 	    $proc->msg(Array::Columnize::columnize(\@cmds,
 						   {displaywidth => $proc->{num_cols},
 						    colsep => '  ',
@@ -91,7 +102,7 @@ sub run($$) {
 		}
 	    } else {
 		my @cmds = $self->command_names();
-		my @matches = sort grep(/^${cmd_name}/, @cmds);
+		my @matches = grep(/^${cmd_name}/, @cmds);
 		if (!scalar @matches) {
 		    $proc->errmsg("No commands found matching /^${cmd_name}/. Try \"help\".");
 		} else {

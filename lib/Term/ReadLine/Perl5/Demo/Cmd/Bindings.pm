@@ -6,6 +6,7 @@ use Data::Printer;
 use rlib '../lib';
 
 use Term::ReadLine::Perl5::Demo::Cmd;
+use Term::ReadLine::Perl5::Demo::CmdProc qw(complete_token);
 use constant MIN_ARGS  => 1;  # Need at least this many
 use constant MAX_ARGS  => 1;  # Need at most this many
 
@@ -21,12 +22,19 @@ our $NAME = set_name();
 our $HELP = <<'HELP';
 =pod
 
-B<Bindings> {B<emacs>|B<vi>|B<vicmd>|B<visearch>}
+B<Bindings> {B<emacs>|B<vi>|B<vicmd>|B<vipos>|B<visearch>}
 
-Show current key bindings for the given keymap
+Show current key bindings for the given keymap.
 
 =cut
 HELP
+
+sub complete($$)
+{
+    my ($self, $prefix) = @_;
+    my @completions = qw(emacs vi vicmd vipos visearch);
+    complete_token(\@completions, $prefix);
+}
 
 sub classify($) {
     my $ord = shift;
